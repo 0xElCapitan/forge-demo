@@ -330,9 +330,37 @@ button {
   box-shadow: 0 18px 34px rgba(15, 169, 186, 0.2);
 }
 
+.button-secondary {
+  border: 1px solid var(--border-strong);
+  background: var(--surface);
+  color: var(--text-primary);
+  box-shadow: var(--shadow-soft);
+}
+
+.button-compact {
+  padding: 11px 14px;
+  font-size: 0.92rem;
+}
+
 .text-link {
   color: var(--text-secondary);
   font-weight: 600;
+}
+
+.hero-sequence {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.hero-sequence span {
+  padding: 9px 12px;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--text-secondary);
+  font-size: 0.83rem;
+  font-weight: 700;
 }
 
 .hero-metrics {
@@ -373,7 +401,7 @@ button {
 .pipeline-panel {
   position: relative;
   overflow: hidden;
-  min-height: 680px;
+  min-height: 620px;
   border-radius: var(--radius-lg);
   border: 1px solid var(--border-strong);
   background: var(--surface-strong);
@@ -425,6 +453,16 @@ button {
   animation: livePulse 2s ease-in-out infinite;
 }
 
+.live-chip--hero {
+  box-shadow:
+    0 0 0 1px rgba(15, 169, 186, 0.08),
+    inset 0 1px 0 rgba(255, 255, 255, 0.18);
+}
+
+.live-chip--hero::before {
+  animation: livePulseSoft 3.4s ease-in-out infinite;
+}
+
 .pipeline-caption {
   color: var(--text-muted);
   font-size: 0.88rem;
@@ -432,13 +470,16 @@ button {
 
 .pipeline-shell {
   position: relative;
-  min-height: 560px;
+  min-height: 520px;
   border-radius: 24px;
   background:
     linear-gradient(180deg, rgba(255, 255, 255, 0.26), rgba(255, 255, 255, 0.02)),
     var(--surface-muted);
   border: 1px solid var(--border);
   overflow: hidden;
+  display: grid;
+  place-items: center;
+  padding: 32px;
 }
 
 .pipeline-shell::before {
@@ -530,11 +571,281 @@ button {
 }
 
 .hero-feed-slot {
-  position: absolute;
-  left: 24px;
-  right: 24px;
-  bottom: 24px;
+  position: relative;
+  width: 100%;
+  display: grid;
+  place-items: center;
   z-index: 2;
+  transition: opacity 160ms ease, transform 220ms cubic-bezier(0.2, 1, 0.22, 1);
+}
+
+.hero-feed-slot.is-swapping {
+  opacity: 0;
+  transform: translateY(10px);
+}
+
+.translation-layout {
+  display: grid;
+  grid-template-columns: minmax(320px, 0.78fr) minmax(0, 1.22fr);
+  gap: 24px;
+  align-items: start;
+}
+
+.translation-controls,
+.translation-result {
+  padding: 28px;
+}
+
+.translation-controls {
+  display: grid;
+  gap: 22px;
+}
+
+.translation-result {
+  display: grid;
+  gap: 20px;
+}
+
+.translation-intro {
+  display: grid;
+  gap: 10px;
+}
+
+.translation-intro h3,
+.translation-result h3 {
+  margin: 0;
+  font-size: 1.45rem;
+  line-height: 1.06;
+}
+
+.translation-intro p,
+.translation-result p {
+  margin: 0;
+  color: var(--text-secondary);
+}
+
+.example-feed-grid {
+  display: grid;
+  gap: 12px;
+}
+
+.example-feed-btn {
+  width: 100%;
+  text-align: left;
+  border: 1px solid var(--border);
+  background: var(--surface-muted);
+  color: var(--text-primary);
+  border-radius: 18px;
+  padding: 16px 18px;
+  cursor: pointer;
+  transition: transform 160ms ease, border-color 160ms ease, box-shadow 160ms ease, background 160ms ease;
+}
+
+.example-feed-btn:hover {
+  transform: translateY(-1px);
+  border-color: var(--accent-line);
+  box-shadow: var(--shadow-soft);
+}
+
+.example-feed-btn.active {
+  border-color: var(--accent-line);
+  background: var(--surface);
+  box-shadow:
+    var(--shadow-soft),
+    0 0 0 1px rgba(15, 169, 186, 0.16);
+}
+
+.example-feed-btn__top {
+  display: flex;
+  justify-content: space-between;
+  gap: 14px;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.example-feed-btn__name {
+  font-size: 0.95rem;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.example-feed-btn__meta {
+  font-family: var(--font-mono);
+  font-size: 0.74rem;
+  color: var(--text-muted);
+}
+
+.example-feed-btn__copy {
+  color: var(--text-secondary);
+  font-size: 0.92rem;
+  line-height: 1.45;
+}
+
+.translation-process {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.translation-process div {
+  padding: 14px;
+  border-radius: 16px;
+  border: 1px solid var(--border);
+  background: var(--surface);
+}
+
+.translation-process strong {
+  display: block;
+  margin-bottom: 6px;
+  font-size: 0.76rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.translation-process span {
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+}
+
+.translation-verdict {
+  font-size: 1rem;
+  line-height: 1.6;
+}
+
+.translation-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.translation-block {
+  padding: 16px;
+  border-radius: 18px;
+  border: 1px solid var(--border);
+  background: var(--surface-muted);
+  display: grid;
+  gap: 10px;
+}
+
+.translation-block--strong {
+  background: var(--surface);
+  border-color: var(--accent-line);
+}
+
+.translation-label {
+  color: var(--text-muted);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.translation-block h4 {
+  margin: 0;
+  font-size: 1.08rem;
+  line-height: 1.2;
+}
+
+.translation-detect-list {
+  margin: 0;
+  padding-left: 18px;
+  color: var(--text-secondary);
+  display: grid;
+  gap: 8px;
+}
+
+.translation-detect-list li {
+  padding-left: 2px;
+}
+
+.translation-template-question {
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  color: var(--text-secondary);
+  line-height: 1.65;
+}
+
+.translation-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.translation-details {
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  background: var(--surface-muted);
+  padding: 0;
+  overflow: hidden;
+}
+
+.translation-details summary {
+  list-style: none;
+  cursor: pointer;
+  padding: 16px 18px;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.translation-details summary::-webkit-details-marker {
+  display: none;
+}
+
+.translation-details[open] summary {
+  border-bottom: 1px solid var(--border);
+}
+
+.translation-tech {
+  padding: 16px 18px 18px;
+  display: grid;
+  gap: 12px;
+}
+
+.translation-tech-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.translation-tech-item {
+  padding: 12px 14px;
+  border-radius: 14px;
+  border: 1px solid var(--border);
+  background: var(--surface);
+}
+
+.translation-tech-item span {
+  display: block;
+  margin-bottom: 8px;
+  color: var(--text-muted);
+  font-size: 0.7rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.translation-tech-item strong {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  line-height: 1.6;
+  overflow-wrap: anywhere;
+}
+
+.translation-tech-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.translation-tech-tags span {
+  padding: 8px 10px;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--text-secondary);
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
 }
 
 .capability-grid {
@@ -743,11 +1054,49 @@ button {
 
 .feed-card--hero {
   min-width: auto;
+  width: min(100%, 496px);
   background: rgba(255, 255, 255, 0.94);
+  border-color: rgba(15, 169, 186, 0.12);
+  --hero-card-shadow-base:
+    0 24px 56px rgba(12, 17, 24, 0.12),
+    0 0 0 1px rgba(15, 169, 186, 0.06);
+  --hero-card-shadow-peak:
+    0 28px 62px rgba(12, 17, 24, 0.16),
+    0 0 0 1px rgba(15, 169, 186, 0.10);
+  box-shadow: var(--hero-card-shadow-base);
+  position: relative;
+  overflow: hidden;
+  animation: heroCardPresence 6.2s ease-in-out infinite;
 }
 
 html[data-theme="dark"] .feed-card--hero {
   background: rgba(14, 16, 20, 0.96);
+  border-color: rgba(31, 200, 219, 0.14);
+  --hero-card-shadow-base:
+    0 28px 64px rgba(0, 0, 0, 0.34),
+    0 0 0 1px rgba(31, 200, 219, 0.08);
+  --hero-card-shadow-peak:
+    0 32px 72px rgba(0, 0, 0, 0.42),
+    0 0 0 1px rgba(31, 200, 219, 0.12);
+}
+
+.feed-card--hero::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  border: 1px solid rgba(15, 169, 186, 0.18);
+  opacity: 0.24;
+  pointer-events: none;
+  animation: heroCardAccent 6.2s ease-in-out infinite;
+}
+
+html[data-theme="dark"] .feed-card--hero::after {
+  border-color: rgba(31, 200, 219, 0.22);
+}
+
+.feed-card--hero:hover {
+  transform: none;
 }
 
 .feed-card__schema-block {
@@ -1326,6 +1675,17 @@ html[data-theme="dark"] .feed-card--hero {
   }
 }
 
+@keyframes livePulseSoft {
+  0%, 100% {
+    opacity: 0.96;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.68;
+    transform: scale(0.9);
+  }
+}
+
 @keyframes flow {
   from {
     stroke-dashoffset: 0;
@@ -1358,6 +1718,24 @@ html[data-theme="dark"] .feed-card--hero {
   }
 }
 
+@keyframes heroCardPresence {
+  0%, 100% {
+    box-shadow: var(--hero-card-shadow-base);
+  }
+  50% {
+    box-shadow: var(--hero-card-shadow-peak);
+  }
+}
+
+@keyframes heroCardAccent {
+  0%, 100% {
+    opacity: 0.22;
+  }
+  50% {
+    opacity: 0.42;
+  }
+}
+
 @media (max-width: 1180px) {
   .hero {
     grid-template-columns: 1fr;
@@ -1370,7 +1748,8 @@ html[data-theme="dark"] .feed-card--hero {
 
   .capability-grid,
   .trust-grid,
-  .console-layout {
+  .console-layout,
+  .translation-layout {
     grid-template-columns: 1fr;
   }
 
@@ -1390,7 +1769,9 @@ html[data-theme="dark"] .feed-card--hero {
   }
 
   .hero-metrics,
-  .console-summary-grid {
+  .console-summary-grid,
+  .translation-process,
+  .translation-tech-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
@@ -1444,7 +1825,8 @@ html[data-theme="dark"] .feed-card--hero {
   .hero-metrics,
   .trust-stats,
   .breakdown-grid,
-  .step-diagram {
+  .step-diagram,
+  .translation-grid {
     grid-template-columns: 1fr;
   }
 
@@ -1462,13 +1844,12 @@ html[data-theme="dark"] .feed-card--hero {
   }
 
   .hero-feed-slot {
-    position: static;
-    margin-top: 18px;
-    padding: 0 18px 18px;
+    margin-top: 0;
   }
 
   .pipeline-shell {
-    padding-bottom: 18px;
+    min-height: 420px;
+    padding: 24px;
   }
 
   .pipeline-panel {
@@ -1485,7 +1866,9 @@ html[data-theme="dark"] .feed-card--hero {
   .surface-card,
   .capability-card,
   .step-card,
-  .trust-card {
+  .trust-card,
+  .translation-controls,
+  .translation-result {
     padding: 20px;
   }
 
@@ -1496,6 +1879,14 @@ html[data-theme="dark"] .feed-card--hero {
   .console-controls,
   .console-results {
     gap: 16px;
+  }
+
+  .translation-actions {
+    flex-direction: column;
+  }
+
+  .translation-actions .button {
+    width: 100%;
   }
 
   .particle-canvas {
@@ -1543,7 +1934,9 @@ html[data-theme="dark"] .feed-card--hero {
   .hero-actions,
   .header-actions,
   .hero-metrics,
-  .console-summary-grid {
+  .console-summary-grid,
+  .translation-process,
+  .translation-tech-grid {
     grid-template-columns: 1fr;
     width: 100%;
   }
@@ -1586,6 +1979,11 @@ html[data-theme="dark"] .feed-card--hero {
     font-size: 0.98rem;
   }
 
+  .translation-intro h3,
+  .translation-result h3 {
+    font-size: 1.22rem;
+  }
+
   .hero-metrics div {
     padding: 14px;
   }
@@ -1606,6 +2004,7 @@ html[data-theme="dark"] .feed-card--hero {
   .pipeline-shell {
     min-height: 0;
     border-radius: 18px;
+    padding: 18px;
   }
 
   .pipeline-graph {
@@ -1614,7 +2013,7 @@ html[data-theme="dark"] .feed-card--hero {
   }
 
   .hero-feed-slot {
-    padding: 0 12px 12px;
+    padding: 0;
   }
 
   .feed-card,
@@ -1622,7 +2021,9 @@ html[data-theme="dark"] .feed-card--hero {
   .surface-card,
   .capability-card,
   .step-card,
-  .trust-card {
+  .trust-card,
+  .translation-controls,
+  .translation-result {
     padding: 16px;
     border-radius: 18px;
   }
@@ -1659,6 +2060,21 @@ html[data-theme="dark"] .feed-card--hero {
 
   .proposal-question {
     font-size: 1rem;
+  }
+
+  .translation-block h4 {
+    font-size: 1rem;
+  }
+
+  .translation-process div,
+  .translation-block,
+  .translation-tech-item {
+    padding: 14px;
+  }
+
+  .translation-verdict,
+  .translation-detect-list {
+    font-size: 0.94rem;
   }
 
   .proposal-tags span,
@@ -1710,6 +2126,13 @@ html[data-theme="dark"] .feed-card--hero {
     min-width: 90vw;
   }
 
+  .translation-process div,
+  .translation-block,
+  .translation-tech-item,
+  .example-feed-btn {
+    padding: 12px;
+  }
+
   .console-summary-grid,
   .hero-metrics {
     gap: 10px;
@@ -1748,11 +2171,11 @@ html[data-theme="dark"] .feed-card--hero {
     </a>
 
     <nav class="site-nav" aria-label="Primary">
-      <a href="#what-it-does">What it does</a>
+      <a href="#try-forge">Try a feed</a>
       <a href="#live-feeds">Live feeds</a>
       <a href="#how-it-works">How it works</a>
       <a href="#trust">Trust</a>
-      <a href="#oracle-console">Oracle console</a>
+      <a href="#oracle-console">Technical view</a>
     </nav>
 
     <div class="header-actions">
@@ -1763,15 +2186,21 @@ html[data-theme="dark"] .feed-card--hero {
   <main id="top">
     <section class="section hero">
       <div class="hero-copy reveal" style="--delay: 0.05s;">
-        <p class="eyebrow">Feed-adaptive oracle and runtime generator</p>
-        <h1>Characterize any feed before an agent acts on it.</h1>
+        <p class="eyebrow">Feed classification for prediction infrastructure</p>
+        <h1>Pick a feed. See how FORGE classifies it.</h1>
         <p class="hero-text">
-          FORGE reads the grammar of a live event stream, not the headline around it. It classifies cadence, distribution,
-          noise, density, and thresholds, then emits the right ProposalEnvelope for Echelon's admission gate.
+          FORGE reads the structure of a live data feed and determines which prediction-market template it can support.
+          The engine stays rigorous. The interface now shows that reasoning faster.
         </p>
         <div class="hero-actions">
-          <a class="button button-primary" href="#oracle-console">Open the Oracle</a>
-          <a class="text-link" href="#live-feeds">Watch the live feed rail</a>
+          <a class="button button-primary" href="#try-forge">Try a feed</a>
+          <a class="button button-secondary" href="#oracle-console">Inspect technical view</a>
+        </div>
+        <div class="hero-sequence">
+          <span>1. Choose a feed</span>
+          <span>2. FORGE detects its structure</span>
+          <span>3. The engine selects a template</span>
+          <span>4. Technical detail stays available</span>
         </div>
         <dl class="hero-metrics">
           <div>
@@ -1792,94 +2221,130 @@ html[data-theme="dark"] .feed-card--hero {
       <div class="hero-visual reveal" style="--delay: 0.14s;">
         <div class="pipeline-panel">
           <div class="pipeline-topline">
-            <span class="live-chip">Live graph</span>
+            <span class="live-chip live-chip--hero">Live feed</span>
             <span class="pipeline-caption">Ingest -> characterize -> serve</span>
           </div>
 
           <div class="pipeline-shell">
-            <div class="pipeline-node-field" aria-hidden="true">
-              <span></span>
-              <span></span>
-              <span></span>
-              <span></span>
-              <span></span>
-              <span></span>
-              <span></span>
-              <span></span>
-            </div>
-
-            <svg class="pipeline-graph" viewBox="0 0 720 420" aria-hidden="true">
-              <defs>
-                <filter id="softGlow">
-                  <feGaussianBlur stdDeviation="6" result="blur"></feGaussianBlur>
-                  <feMerge>
-                    <feMergeNode in="blur"></feMergeNode>
-                    <feMergeNode in="SourceGraphic"></feMergeNode>
-                  </feMerge>
-                </filter>
-              </defs>
-
-              <path class="graph-layer" d="M72 100 C148 82 216 110 286 152"></path>
-              <path class="graph-layer" d="M72 252 C146 260 220 228 292 186"></path>
-              <path class="graph-layer" d="M122 334 C192 316 244 294 300 226"></path>
-              <path class="graph-layer" d="M284 152 C360 116 422 128 492 166"></path>
-              <path class="graph-layer" d="M292 186 C366 184 430 210 498 256"></path>
-              <path class="graph-layer" d="M300 226 C376 254 444 292 532 306"></path>
-              <path class="graph-layer" d="M492 166 C560 150 620 164 660 214"></path>
-              <path class="graph-layer" d="M498 256 C570 254 622 246 660 214"></path>
-              <path class="graph-layer" d="M532 306 C592 300 636 274 660 214"></path>
-
-              <path class="graph-flow" d="M72 100 C148 82 216 110 286 152"></path>
-              <path class="graph-flow" d="M72 252 C146 260 220 228 292 186"></path>
-              <path class="graph-flow" d="M122 334 C192 316 244 294 300 226"></path>
-              <path class="graph-flow" d="M284 152 C360 116 422 128 492 166"></path>
-              <path class="graph-flow" d="M292 186 C366 184 430 210 498 256"></path>
-              <path class="graph-flow" d="M300 226 C376 254 444 292 532 306"></path>
-              <path class="graph-flow" d="M492 166 C560 150 620 164 660 214"></path>
-              <path class="graph-flow" d="M498 256 C570 254 622 246 660 214"></path>
-              <path class="graph-flow" d="M532 306 C592 300 636 274 660 214"></path>
-
-              <circle class="graph-node" cx="72" cy="100" r="22"></circle>
-              <circle class="graph-node" cx="72" cy="252" r="18"></circle>
-              <circle class="graph-node" cx="122" cy="334" r="16"></circle>
-              <circle class="graph-core" cx="292" cy="186" r="34"></circle>
-              <circle class="graph-ring" cx="292" cy="186" r="54"></circle>
-              <circle class="graph-node" cx="492" cy="166" r="18"></circle>
-              <circle class="graph-node" cx="498" cy="256" r="20"></circle>
-              <circle class="graph-node" cx="532" cy="306" r="16"></circle>
-              <circle class="graph-core" cx="660" cy="214" r="26"></circle>
-              <circle class="graph-ring" cx="660" cy="214" r="44"></circle>
-
-              <circle class="graph-packet" r="4" filter="url(#softGlow)">
-                <animateMotion dur="5.8s" repeatCount="indefinite" path="M72 100 C148 82 216 110 286 152"></animateMotion>
-              </circle>
-              <circle class="graph-packet" r="4" filter="url(#softGlow)">
-                <animateMotion dur="6.1s" begin="1.2s" repeatCount="indefinite" path="M72 252 C146 260 220 228 292 186"></animateMotion>
-              </circle>
-              <circle class="graph-packet" r="4" filter="url(#softGlow)">
-                <animateMotion dur="6.6s" begin="0.6s" repeatCount="indefinite" path="M122 334 C192 316 244 294 300 226"></animateMotion>
-              </circle>
-              <circle class="graph-packet" r="4" filter="url(#softGlow)">
-                <animateMotion dur="6.2s" begin="1.4s" repeatCount="indefinite" path="M292 186 C366 184 430 210 498 256"></animateMotion>
-              </circle>
-              <circle class="graph-packet" r="4" filter="url(#softGlow)">
-                <animateMotion dur="5.2s" begin="0.8s" repeatCount="indefinite" path="M498 256 C570 254 622 246 660 214"></animateMotion>
-              </circle>
-            </svg>
-
             <div class="hero-feed-slot" id="heroFeedCard"></div>
           </div>
         </div>
       </div>
     </section>
 
+    <section class="section" id="try-forge">
+      <div class="section-heading reveal" style="--delay: 0.04s;">
+        <p class="eyebrow">Try FORGE</p>
+        <h2>Choose a real feed and watch the engine translate it into a market shape.</h2>
+        <p>
+          Start with one of the validated examples below. FORGE will show the input feed, what it detects, which template it
+          selects first, and why that fit makes sense.
+        </p>
+      </div>
+
+      <div class="translation-layout">
+        <section class="surface-card translation-controls reveal" style="--delay: 0.08s;">
+          <div class="translation-intro">
+            <p class="eyebrow">Example feeds</p>
+            <h3>Choose a feed to inspect its structure and output</h3>
+            <p>Each choice below applies a real FORGE preset and updates both the plain-English result and the technical console.</p>
+          </div>
+
+          <div class="example-feed-grid">
+            <button class="example-feed-btn" type="button" data-preset="tremor">
+              <div class="example-feed-btn__top">
+                <span class="example-feed-btn__name">TREMOR</span>
+                <span class="example-feed-btn__meta">seismic</span>
+              </div>
+              <div class="example-feed-btn__copy">Irregular event arrivals, spike-driven magnitudes, and statistical trigger behavior.</div>
+            </button>
+            <button class="example-feed-btn" type="button" data-preset="corona">
+              <div class="example-feed-btn__top">
+                <span class="example-feed-btn__name">CORONA</span>
+                <span class="example-feed-btn__meta">space weather</span>
+              </div>
+              <div class="example-feed-btn__copy">Composite solar signals with mixed cadence and clear operational thresholds.</div>
+            </button>
+            <button class="example-feed-btn" type="button" data-preset="breath">
+              <div class="example-feed-btn__top">
+                <span class="example-feed-btn__name">BREATH</span>
+                <span class="example-feed-btn__meta">air quality</span>
+              </div>
+              <div class="example-feed-btn__copy">Bounded environmental indices, multi-tier sensing, and regulatory settlement anchors.</div>
+            </button>
+          </div>
+
+          <div class="translation-process">
+            <div>
+              <strong>Input feed</strong>
+              <span>Pick a real signal source.</span>
+            </div>
+            <div>
+              <strong>FORGE detects</strong>
+              <span>Cadence, shape, noise, density, thresholds.</span>
+            </div>
+            <div>
+              <strong>Template</strong>
+              <span>The strongest market fit appears first.</span>
+            </div>
+            <div>
+              <strong>Why</strong>
+              <span>The reasoning stays visible and inspectable.</span>
+            </div>
+          </div>
+        </section>
+
+        <section class="surface-card translation-result reveal" style="--delay: 0.12s;">
+          <div class="translation-intro">
+            <p class="eyebrow">FORGE translation layer</p>
+            <h3 id="translationTitle">FORGE is reading the selected feed.</h3>
+            <p class="translation-verdict" id="translationVerdict">Pick a feed to see how the engine translates structure into a market shape.</p>
+          </div>
+
+          <div class="translation-grid">
+            <article class="translation-block">
+              <span class="translation-label">Input feed</span>
+              <h4 id="translationInputTitle">Feed input</h4>
+              <p id="translationInputCopy"></p>
+            </article>
+
+            <article class="translation-block">
+              <span class="translation-label">FORGE detects</span>
+              <ul class="translation-detect-list" id="translationDetectList"></ul>
+            </article>
+
+            <article class="translation-block translation-block--strong">
+              <span class="translation-label">Selected template</span>
+              <h4 id="translationTemplateTitle">Template selection</h4>
+              <p class="translation-template-question" id="translationTemplateQuestion"></p>
+            </article>
+
+            <article class="translation-block">
+              <span class="translation-label">Why this fits</span>
+              <p id="translationWhyCopy"></p>
+            </article>
+          </div>
+
+          <div class="translation-actions">
+            <a class="button button-primary button-compact" href="#oracle-console">Open technical view</a>
+            <a class="button button-secondary button-compact" href="#how-it-works">See the system flow</a>
+          </div>
+
+          <details class="translation-details">
+            <summary>Inspect the technical profile behind this answer</summary>
+            <div class="translation-tech" id="translationTech"></div>
+          </details>
+        </section>
+      </div>
+    </section>
+
     <section class="section" id="what-it-does">
       <div class="section-heading reveal" style="--delay: 0.04s;">
-        <p class="eyebrow">What it does</p>
-        <h2>The feed-native pathway into Echelon's Theatre Factory.</h2>
+        <p class="eyebrow">System map</p>
+        <h2>The same rigorous engine, organized so humans can grasp it faster.</h2>
         <p>
-          FORGE is not another research wrapper around market copy. It is the supply-side system that turns live structured
-          feeds into deterministic, typed market proposals with explicit trust boundaries.
+          FORGE is still the feed-native path into Echelon's Theatre Factory. The difference here is presentation: first the
+          plain-English translation, then the deeper system language underneath it.
         </p>
       </div>
 
@@ -1890,9 +2355,8 @@ html[data-theme="dark"] .feed-card--hero {
             <h3>Reads feed grammar, then chooses the right market form.</h3>
           </div>
           <p>
-            The classifier sees structure before narrative. Same feed in, same profile out: cadence, distribution, noise,
-            density, thresholds. Themis then maps that profile to threshold_gate, cascade, divergence, regime_shift,
-            anomaly, or persistence without a human deciding what to ask.
+            The classifier sees structure before narrative. Same feed in, same profile out. Themis then maps that profile to
+            threshold_gate, cascade, divergence, regime_shift, anomaly, or persistence without manual curation.
           </p>
           <div class="capability-matrix">
             <div class="matrix-item">
@@ -1921,8 +2385,8 @@ html[data-theme="dark"] .feed-card--hero {
               <h3>Versioned output, not loose signal.</h3>
             </div>
             <p>
-              Every proposal lands as a ProposalEnvelope with deterministic proposal IDs, traceability back to the template,
-              and a clean seam: FORGE emits, Echelon admits.
+              Every proposal lands as a ProposalEnvelope with deterministic IDs, template traceability, and a clean seam:
+              FORGE emits, Echelon admits.
             </p>
           </article>
 
@@ -1933,7 +2397,7 @@ html[data-theme="dark"] .feed-card--hero {
             </div>
             <p>
               Trust tiering is code, not policy theater. T0 through T3 sources are evaluated before settlement authority is
-              ever implied, and negative policy flags stay visible to downstream systems.
+              implied, and negative policy flags stay visible to downstream systems.
             </p>
           </article>
         </div>
@@ -2100,11 +2564,11 @@ html[data-theme="dark"] .feed-card--hero {
 
     <section class="section oracle-console" id="oracle-console">
       <div class="section-heading reveal" style="--delay: 0.04s;">
-        <p class="eyebrow">Oracle console</p>
-        <h2>The original classifier, rebuilt as a cleaner oracle surface.</h2>
+        <p class="eyebrow">Technical view</p>
+        <h2>Inspect the exact profile, matched rules, and seam output.</h2>
         <p class="console-intro">
-          The logic below preserves your demo's rule engine, presets, usefulness scoring, and selective matching behavior. The
-          interface now presents it as infrastructure instead of a debugging panel.
+          This is the underlying engine view. The classifier logic, presets, usefulness scoring, and selective matching
+          behavior remain intact for technical users who want to inspect the system directly.
         </p>
       </div>
 
@@ -2461,6 +2925,39 @@ const PRESET_DETAILS = {
   }
 };
 
+const PRESET_TRANSLATIONS = {
+  tremor: {
+    input: "A seismic event stream with irregular arrivals, sudden spikes, and no hard ceiling on the important values.",
+    summary: "FORGE reads this as a spiky seismic signal and reaches first for threshold-style and cascade-style market structures.",
+    detect: [
+      "Events arrive when the world changes, not on a fixed clock.",
+      "Magnitudes behave like an unbounded numeric signal.",
+      "The feed is spike-driven rather than smooth.",
+      "Statistical thresholds matter more than regulatory ones."
+    ]
+  },
+  corona: {
+    input: "A composite space-weather feed that combines multiple signals and cadences into one operational surface.",
+    summary: "FORGE reads this as a multi-source operational signal and prioritizes threshold questions around flare, geomagnetic, and arrival conditions.",
+    detect: [
+      "The feed combines fast and slow signal layers.",
+      "Multiple values are fused into one composite surface.",
+      "Noise is mixed rather than purely smooth or purely spiky.",
+      "Operational thresholds are explicit and settlement-friendly."
+    ]
+  },
+  breath: {
+    input: "A bounded environmental index with a multi-tier sensing network and a clear regulatory settlement path.",
+    summary: "FORGE reads this as a bounded public-safety feed and prioritizes threshold and divergence questions with a clear resolution anchor.",
+    detect: [
+      "The feed updates on a repeatable cadence.",
+      "Values stay inside a bounded, interpretable range.",
+      "The system draws from a multi-tier sensor network.",
+      "Regulatory thresholds are part of the feed's meaning."
+    ]
+  }
+};
+
 const LIVE_FEEDS = [
   {
     id: "tremor",
@@ -2516,6 +3013,10 @@ let profile = {
   density: { classification: "sparse_network" },
   thresholds: { type: "statistical" }
 };
+
+let activeHeroFeedId = LIVE_FEEDS[0].id;
+let heroSwapTimeout = 0;
+let lastHeroSwapTimestamp = Date.now();
 
 function escapeHtml(value) {
   return String(value)
@@ -2731,6 +3232,163 @@ function derivePreviewFeed(feedProfile, proposals) {
   return deriveCustomFeed(feedProfile, proposals);
 }
 
+function describeInputFeed(feedProfile, previewFeed, preset) {
+  if (preset && PRESET_TRANSLATIONS[preset]) {
+    return PRESET_TRANSLATIONS[preset].input;
+  }
+
+  const cadence = {
+    seconds: "a high-frequency feed",
+    minutes: "a repeatable minute-scale feed",
+    hours: "a slower hourly feed",
+    days: "a day-scale feed",
+    event_driven: "an event-driven feed",
+    multi_cadence: "a multi-cadence feed"
+  }[feedProfile.cadence.classification] ?? "a structured feed";
+
+  const distribution = {
+    bounded_numeric: "bounded numeric values",
+    unbounded_numeric: "unbounded numeric values",
+    categorical: "discrete state changes",
+    composite: "multiple fused signals"
+  }[feedProfile.distribution.type] ?? "typed measurements";
+
+  return `${escapeHtml(previewFeed.name)} is ${cadence} with ${distribution}, presented as ${escapeHtml(previewFeed.type)}.`;
+}
+
+function buildDetectionList(feedProfile, preset) {
+  if (preset && PRESET_TRANSLATIONS[preset]) {
+    return PRESET_TRANSLATIONS[preset].detect;
+  }
+
+  const cadence = {
+    seconds: "The signal updates continuously in near-real time.",
+    minutes: "The signal updates on a steady minute-scale cadence.",
+    hours: "The signal updates more slowly, which changes the question design.",
+    days: "The signal is slow-moving and better suited to longer windows.",
+    event_driven: "Events arrive when they happen, not on a timer.",
+    multi_cadence: "The feed combines fast and slow sub-signals."
+  }[feedProfile.cadence.classification];
+
+  const distribution = {
+    bounded_numeric: "Values stay within a bounded, interpretable range.",
+    unbounded_numeric: "Important values can move without a hard ceiling.",
+    categorical: "The feed expresses states more than continuous magnitudes.",
+    composite: "The feed is built from multiple measurements at once."
+  }[feedProfile.distribution.type];
+
+  const noise = {
+    smooth: "The signal behaves smoothly and is comparatively predictable.",
+    noisy: "The signal moves continuously but with substantial variance.",
+    spike_driven: "Meaning concentrates in sharp jumps and threshold crossings.",
+    mixed: "The feed mixes steady behavior with bursts and irregularity."
+  }[feedProfile.noise.classification];
+
+  const density = {
+    single_point: "The observation layer is narrow and source-concentrated.",
+    sparse_network: "The observation layer is distributed, but not dense.",
+    dense_network: "The signal comes from a dense network of sources.",
+    multi_tier: "The signal is layered across multiple sensing tiers."
+  }[feedProfile.density.classification];
+
+  const thresholds = {
+    regulatory: "Resolution can anchor to an explicit regulatory threshold.",
+    statistical: "The important threshold is statistical rather than administrative.",
+    physical: "The important threshold is grounded in a physical boundary.",
+    none: "There is no obvious threshold anchor, which narrows template fit."
+  }[feedProfile.thresholds.type];
+
+  return [cadence, distribution, noise, `${density} ${thresholds}`].filter(Boolean);
+}
+
+function explainTemplateFit(template, feedProfile) {
+  switch (template) {
+    case "threshold_gate":
+      return "A threshold gate fits when the feed has a meaningful crossing condition inside a clear time window. It turns structural signal into a resolvable yes-or-no question.";
+    case "cascade":
+      return "A cascade fits when one event can trigger a count of follow-on events. The engine is reading the feed as a system where aftermath matters, not just the initial trigger.";
+    case "divergence":
+      return "A divergence fit means the feed is valuable as a comparison surface. FORGE sees two interpretable views of the same reality and can ask whether they separate.";
+    case "regime_shift":
+      return "A regime shift fits when the important question is whether the system transitions between distinct states, not whether it merely fluctuates inside one state.";
+    case "anomaly":
+      return "An anomaly fit means the feed is best understood against its own baseline. FORGE is treating the signal as something to monitor for unusual deviation.";
+    case "persistence":
+      return "A persistence fit means the system can ask whether a condition continues across multiple windows rather than whether it appears once.";
+    default:
+      return "FORGE is holding complexity back because the signal has not yet closed on a stronger template fit.";
+  }
+}
+
+function buildTranslationModel(feedProfile, proposals, usefulness) {
+  const preset = detectPreset(feedProfile);
+  const previewFeed = derivePreviewFeed(feedProfile, proposals);
+  const primary = proposals[0] ?? null;
+  const templateLabel = primary ? TEMPLATE_LABELS[primary.template] ?? primary.template : "No template matched";
+  const inputCopy = describeInputFeed(feedProfile, previewFeed, preset);
+  const detectList = buildDetectionList(feedProfile, preset);
+  const verdict = primary
+    ? (preset && PRESET_TRANSLATIONS[preset]
+        ? PRESET_TRANSLATIONS[preset].summary
+        : `FORGE reads ${previewFeed.name} as a ${labelize(feedProfile.noise.classification)} ${labelize(feedProfile.distribution.type)} feed and currently puts ${templateLabel} first.`)
+    : "FORGE sees a structured feed, but no template has enough evidence to fire cleanly yet.";
+  const why = primary ? explainTemplateFit(primary.template, feedProfile) : "This profile is close to several rules, but the engine is intentionally withholding a proposal until one closes fully.";
+  const fingerprint = [
+    `cadence: ${feedProfile.cadence.classification}`,
+    `distribution: ${feedProfile.distribution.type}`,
+    `noise: ${feedProfile.noise.classification}`,
+    `density: ${feedProfile.density.classification}`,
+    `thresholds: ${feedProfile.thresholds.type}`
+  ].join("\n");
+
+  return {
+    title: primary ? `${previewFeed.name} -> ${templateLabel}` : `${previewFeed.name} -> still classifying`,
+    verdict,
+    inputTitle: previewFeed.name,
+    inputCopy,
+    detectList,
+    templateTitle: templateLabel,
+    templateQuestion: primary ? getQuestion(primary) : "No market template is firing yet.",
+    why,
+    techHtml: `
+      <div class="translation-tech-grid">
+        <div class="translation-tech-item">
+          <span>feed fingerprint</span>
+          <strong>${escapeHtml(fingerprint)}</strong>
+        </div>
+        <div class="translation-tech-item">
+          <span>primary rule</span>
+          <strong>${escapeHtml(primary?.id ?? "none")}</strong>
+        </div>
+        <div class="translation-tech-item">
+          <span>usefulness</span>
+          <strong>${usefulness.score === null ? "--" : `${usefulness.score.toFixed(2)} / ${usefulness.allocation}`}</strong>
+        </div>
+        <div class="translation-tech-item">
+          <span>top question</span>
+          <strong>${escapeHtml(primary ? getQuestion(primary) : "No proposal emitted")}</strong>
+        </div>
+      </div>
+      <div class="translation-tech-tags">
+        ${proposals.length ? proposals.map((proposal) => `<span>${escapeHtml(TEMPLATE_LABELS[proposal.template] ?? proposal.template)}</span>`).join("") : "<span>No template matched</span>"}
+      </div>
+    `
+  };
+}
+
+function renderTranslationLayer(feedProfile, proposals, usefulness) {
+  const model = buildTranslationModel(feedProfile, proposals, usefulness);
+  document.getElementById("translationTitle").textContent = model.title;
+  document.getElementById("translationVerdict").textContent = model.verdict;
+  document.getElementById("translationInputTitle").textContent = model.inputTitle;
+  document.getElementById("translationInputCopy").textContent = model.inputCopy;
+  document.getElementById("translationTemplateTitle").textContent = model.templateTitle;
+  document.getElementById("translationTemplateQuestion").textContent = model.templateQuestion;
+  document.getElementById("translationWhyCopy").textContent = model.why;
+  document.getElementById("translationDetectList").innerHTML = model.detectList.map((item) => `<li>${escapeHtml(item)}</li>`).join("");
+  document.getElementById("translationTech").innerHTML = model.techHtml;
+}
+
 function buildFeedCardMarkup(feed, options = {}) {
   const classes = ["feed-card"];
   if (options.hero) {
@@ -2786,8 +3444,33 @@ function buildFeedCardMarkup(feed, options = {}) {
   `;
 }
 
-function renderHeroCard() {
-  const heroFeed = LIVE_FEEDS[0];
+function getLiveFeedById(feedId) {
+  return LIVE_FEEDS.find((feed) => feed.id === feedId) ?? LIVE_FEEDS[0];
+}
+
+function resolveHeroFeedId(pulseIds = new Set()) {
+  if (!pulseIds.size) {
+    return activeHeroFeedId;
+  }
+
+  const now = Date.now();
+  if (now - lastHeroSwapTimestamp < 4200) {
+    return activeHeroFeedId;
+  }
+
+  const nextFeed = LIVE_FEEDS.find((feed) => pulseIds.has(feed.id) && feed.id !== activeHeroFeedId);
+  if (!nextFeed) {
+    return activeHeroFeedId;
+  }
+
+  activeHeroFeedId = nextFeed.id;
+  lastHeroSwapTimestamp = now;
+  return activeHeroFeedId;
+}
+
+function renderHeroCard(nextHeroFeedId = activeHeroFeedId) {
+  const slot = document.getElementById("heroFeedCard");
+  const heroFeed = getLiveFeedById(nextHeroFeedId);
   const markup = buildFeedCardMarkup(
     {
       ...heroFeed,
@@ -2796,7 +3479,29 @@ function renderHeroCard() {
     },
     { hero: true, eyebrow: "featured live feed" }
   );
-  document.getElementById("heroFeedCard").innerHTML = markup;
+  const shouldSwap = slot.dataset.feedId && slot.dataset.feedId !== heroFeed.id && !reducedMotionQuery.matches;
+
+  activeHeroFeedId = heroFeed.id;
+
+  if (heroSwapTimeout) {
+    window.clearTimeout(heroSwapTimeout);
+    heroSwapTimeout = 0;
+  }
+
+  if (!shouldSwap) {
+    slot.innerHTML = markup;
+    slot.dataset.feedId = heroFeed.id;
+    slot.classList.remove("is-swapping");
+    return;
+  }
+
+  slot.classList.add("is-swapping");
+  heroSwapTimeout = window.setTimeout(() => {
+    slot.innerHTML = markup;
+    slot.dataset.feedId = heroFeed.id;
+    window.requestAnimationFrame(() => slot.classList.remove("is-swapping"));
+    heroSwapTimeout = 0;
+  }, 140);
 }
 
 function renderLiveFeeds(pulseIds = new Set()) {
@@ -2821,7 +3526,7 @@ function renderLiveFeeds(pulseIds = new Set()) {
   }).join("");
   rail.scrollLeft = previousScroll;
 
-  renderHeroCard();
+  renderHeroCard(resolveHeroFeedId(pulseIds));
 }
 
 function renderFingerprint() {
@@ -2907,6 +3612,7 @@ function renderProposals(feedProfile) {
   renderFingerprint();
   renderPreviewFeed(feedProfile, proposals);
   renderEnvelopePanel(proposals, usefulness);
+  renderTranslationLayer(feedProfile, proposals, usefulness);
 
   const preset = detectPreset(feedProfile);
   document.getElementById("activePresetLabel").textContent = preset ? `preset / ${preset}` : "preset / custom";
@@ -2985,7 +3691,7 @@ function syncButtons() {
   }
 
   const activePreset = detectPreset(profile);
-  document.querySelectorAll(".preset-btn").forEach((button) => {
+  document.querySelectorAll(".preset-btn, .example-feed-btn").forEach((button) => {
     button.classList.toggle("active", button.dataset.preset === activePreset);
   });
 }
@@ -3011,6 +3717,11 @@ function applyPreset(name) {
       density: { classification: preset.density },
       thresholds: { type: preset.thresholds }
     };
+  }
+
+  if (LIVE_FEEDS.some((feed) => feed.id === name)) {
+    activeHeroFeedId = name;
+    lastHeroSwapTimestamp = Date.now();
   }
 
   syncButtons();
@@ -3263,6 +3974,10 @@ document.querySelectorAll(".seg-btn").forEach((button) => {
 });
 
 document.querySelectorAll(".preset-btn").forEach((button) => {
+  button.addEventListener("click", () => applyPreset(button.dataset.preset));
+});
+
+document.querySelectorAll(".example-feed-btn").forEach((button) => {
   button.addEventListener("click", () => applyPreset(button.dataset.preset));
 });
 
